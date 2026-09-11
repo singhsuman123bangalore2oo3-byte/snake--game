@@ -1,36 +1,28 @@
-name: Build Android APK
+[app]
 
-on:
-  workflow_dispatch:
+title = Snake Game
+package.name = snakegame
+package.domain = org.example
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+source.dir = .
+source.include_exts = py,png,jpg,jpeg,kv,atlas
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+version = 1.0
 
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            git zip unzip openjdk-17-jdk python3-pip \
-            autoconf libtool pkg-config zlib1g-dev \
-            libncurses5-dev libncursesw5-dev cmake \
-            libffi-dev libssl-dev
+requirements = python3,kivy
 
-      - name: Install Buildozer
-        run: |
-          python3 -m pip install --user --upgrade buildozer cython
+orientation = portrait
+fullscreen = 0
 
-      - name: Build APK
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          buildozer android debug
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Snake-Game-APK
-          path: bin/*.apk
+[buildozer]
+
+log_level = 2
+warn_on_root = 1
+
+
+[android]
+
+android.api = 35
+android.minapi = 21
+android.archs = arm64-v8a
