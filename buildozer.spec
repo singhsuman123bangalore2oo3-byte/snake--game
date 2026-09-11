@@ -21,7 +21,7 @@ log_level = 2
 warn_on_root = 1
 
 
-[android]
+# Android settings
 
 android.api = 35
 android.minapi = 21
