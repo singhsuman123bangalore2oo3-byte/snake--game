@@ -15,30 +15,27 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
- 
-           git zip unzip openjdk-17-jdk python3-pip \
+            git zip unzip openjdk-17-jdk python3-pip \
             autoconf libtool pkg-config zlib1g-dev \
-               libncurses5-dev libncursesw5-dev cmake \
-             libffi-dev libssl-dev automake build-essential \
-                m4
+            libncurses5-dev libncursesw5-dev cmake \
+            libffi-dev libssl-dev automake
+
       - name: Install Buildozer
         run: |
           python3 -m pip install --user --upgrade buildozer cython
 
       - name: Check files
         run: |
-          echo "Current directory:"
           pwd
-          echo "Files:"
           ls -la
-          echo "Git files:"
-          git ls-tree -r --name-only HEAD
+          test -f buildozer.spec
+          test -f main.py
 
       - name: Build APK
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          cd "$GITHUB_WORKSPACE"
-          buildozer -v android debug 2>&1 | tee build.log
+          buildozer -v android debug
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
