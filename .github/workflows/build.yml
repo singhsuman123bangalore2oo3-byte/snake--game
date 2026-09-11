@@ -1,5 +1,6 @@
-- name: Build APK  run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          cd "$GITHUB_WORKSPACE"
-          ls -la
-          buildozer -v android debug
+- name: Build APK 
+  run: |
+    export PATH="$HOME/.local/bin:$PATH"
+    cd "$GITHUB_WORKSPACE" 
+    ls -la
+ buildozer -v android debug
