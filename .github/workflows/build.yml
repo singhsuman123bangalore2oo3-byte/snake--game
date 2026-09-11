@@ -1,5 +1,4 @@
-- name: Build APK
-        run: |
+- name: Build APK  run: |
           export PATH="$HOME/.local/bin:$PATH"
           cd "$GITHUB_WORKSPACE"
           ls -la
